@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS groupomania_internal_network;
+CREATE DATABASE groupomania_internal_network;
