@@ -6,7 +6,7 @@ const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.json')[env];
-const db = {};
+const groupomania_internal_network = {};
 
 let sequelize;
 if (config.use_env_variable) {
@@ -22,16 +22,16 @@ fs
   })
   .forEach(file => {
     const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
-    db[model.name] = model;
+    groupomania_internal_network[model.name] = model;
   });
 
 Object.keys(db).forEach(modelName => {
-  if (db[modelName].associate) {
-    db[modelName].associate(db);
+  if (groupomania_internal_network[modelName].associate) {
+    groupomania_internal_network[modelName].associate(groupomania_internal_network);
   }
 });
 
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
+groupomania_internal_network.sequelize = sequelize;
+groupomania_internal_network.Sequelize = Sequelize;
 
-module.exports = db;
+module.exports = groupomania_internal_network;
