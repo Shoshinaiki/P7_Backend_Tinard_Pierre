@@ -1,6 +1,7 @@
 const  groupomania_internal_network = require("../models");
 const controller_user = groupomania_internal_network.controller_user;
 const Op = groupomania_internal_network.Sequelize.Op;
+const User = groupomania_internal_network.User;
 
 // Create and Save a new user
 exports.create = (req, res) => {
@@ -13,12 +14,15 @@ exports.create = (req, res) => {
   }
   // Create a user 
   const user = {
-    title: req.body.title,
-    description: req.body.description,
-    published: req.body.published ? req.body.published : false
-  };
+    firstName: req.body.firstName,
+    lastName: req.body.lastname,
+    email: req.body.email,
+    emailUnique: true, // email must be unique
+    password: req.body.password
+    };
+      
   // Save user in the database
-  user.create(user)
+  User.create(user)
     .then(data => {
       res.send(data);
     })
@@ -32,7 +36,7 @@ exports.create = (req, res) => {
 
 // Retrieve all users from the database.
 exports.findAll = (req, res) => {
-    users.findAll({ where: { published: true } })
+    User.findAll({ where: { published: true } })
     .then(data => {
       res.send(data);
     })
@@ -47,7 +51,7 @@ exports.findAll = (req, res) => {
 // Find a single user with an id
 exports.findOne = (req, res) => {
     const id = req.params.id;
-    user.findByPk(id)
+    User.findByPk(id)
       .then(data => {
         if (data) {
           res.send(data);
@@ -66,7 +70,7 @@ exports.findOne = (req, res) => {
 // Update a user by the id in the request
 exports.update = (req, res) => {
     const id = req.params.id;
-    user.update(req.body, {
+    User.update(req.body, {
       where: { id: id }
     })
       .then(num => {
@@ -90,7 +94,7 @@ exports.update = (req, res) => {
 // Delete a user with the specified id in the request
 exports.delete = (req, res) => {
     const id = req.params.id;
-    user.destroy({
+    User.destroy({
       where: { id: id }
     })
       .then(num => {
@@ -113,7 +117,7 @@ exports.delete = (req, res) => {
 
 // Delete all users from the database.
 exports.deleteAll = (req, res) => {
-    users.destroy({
+    Users.destroy({
         where: {},
         truncate: false
       })
@@ -130,7 +134,7 @@ exports.deleteAll = (req, res) => {
 
 // Find all published users
 exports.findAllPublished = (req, res) => {
-    users.findAll({ where: { published: true } })
+    Users.findAll({ where: { published: true } })
     .then(data => {
       res.send(data);
     })
