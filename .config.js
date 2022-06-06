@@ -1,7 +1,9 @@
-const sequelize = new Sequelize('groupomania_internal_network', 'Shoshinaiki', 'Misscri@1966', {
+const dotenv = require("dotenv").config();
+const sequelize = new Sequelize('groupomania_internal_network', 'root', process.env.GROUPOMANIA_INTERNAL_NETWORK_PASSWORD, {
   host: 'localhost',
   dialect: 'mysql'
 });
+
 
 try {
     await sequelize.authenticate();

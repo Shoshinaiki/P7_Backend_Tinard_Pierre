@@ -3,19 +3,29 @@ module.exports = (sequelize, DataTypes) => {
       "Post",
       {
         // Model attributes are defined here
-        firstName: {
-          type: DataTypes.STRING,
-          allowNull: false,
+        idPrimarykey: {
+          type: DataTypes.INTEGER,
         },
-        lastName: {
+        text: {
           type: DataTypes.STRING,
           // allowNull defaults to true
         },
-        email: {
+        imageUrl: {
           type: DataTypes.STRING,
         },
-        password: {
+        author: {
           type: DataTypes.STRING
+        },
+        authorId: {
+          type: DataTypes.INTEGER,
+        },
+        like: {
+          type: DataTypes.STRING,
+          allowNull: false,
+        },
+        dislike: {
+          type: DataTypes.STRING,
+          // allowNull defaults to true
         },
         superUser: {
             type: DataTypes.BOOLEAN,

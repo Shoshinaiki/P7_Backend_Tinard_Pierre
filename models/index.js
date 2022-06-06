@@ -25,7 +25,7 @@ fs
     groupomania_internal_network[model.name] = model;
   });
 
-Object.keys(db).forEach(modelName => {
+Object.keys(groupomania_internal_network).forEach(modelName => {
   if (groupomania_internal_network[modelName].associate) {
     groupomania_internal_network[modelName].associate(groupomania_internal_network);
   }

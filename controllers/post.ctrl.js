@@ -76,17 +76,25 @@ exports.findOneMessage = (req, res, next) => {
 })
 .catch(error => res.status(404).json({ error }))
 };
+// UPDATE 
 
-exports.findAllMessagesForOne = (req, res, next) => {
-  let list = ""
-  Message.findAll({ 
-      where: { UserId: req.params.id },
-  })
-  .then((res) => { 
-      list = res;
-      res.status(200).json( { list } )
-  })
-  .catch((error) => { res.status(404).json({ error })})
+exports.modifyMessage = (req, res, next) => {
+    console.log(req.body.message + req.body.messageUrl);
+    let imagePost = "";
+    if (req.file) { 
+        imagePost = `${req.protocol}://${req.get("host")}/images/${req.file.filename}` 
+    }
+    const modify = modifyMessage (
+        {
+            UserId:     req.body.UserId,
+            message:    req.body.message,
+            messageUrl: imagePost
+        }
+    )
+    console.log(message)
+    modifyMessage.update()
+        .then(() => res.status(201).json({ message: "message modifié !" }))
+        .catch(error => res.status(400).json({ error }))
 };
 
 // DELETE 

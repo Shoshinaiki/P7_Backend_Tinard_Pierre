@@ -1,7 +1,6 @@
 {
   "development": {
     "username": "Shoshinaiki",
-    "password": "Misscri@1966",
     "database": "groupomania_internal_network",
     "host": "127.0.0.1",
     "dialect": "mysql"
