@@ -44,7 +44,7 @@ exports.findAllComments = (req, res, next) => {
 
 // UPDATE 
 
-exports.updateComments = (req, res, next) => {
+exports.modifyComments = (req, res, next) => {
     Comment.updatedAl()
     .then(comments => { res.status(200).json(comments )})
     .catch(error => res.status(400).json({ error }))
@@ -52,7 +52,7 @@ exports.updateComments = (req, res, next) => {
  
 // DELETE
 
-exports.delete = (req, res, next) => {
+exports.deleteComments = (req, res, next) => {
   console.log("COMMENT DELETION PROCESS")
   console.log(" comment id is: " + req.query.commentId)
   console.log(" comment Uid is : " + req.query.commentUid)
