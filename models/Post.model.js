@@ -3,8 +3,10 @@ module.exports = (sequelize, DataTypes) => {
       "Post",
       {
         // Model attributes are defined here
-        idPrimarykey: {
+        postId: { 
+          primarykey: true,
           type: DataTypes.INTEGER,
+          autoIncrement: true,
         },
         text: {
           type: DataTypes.STRING,
@@ -35,5 +37,14 @@ module.exports = (sequelize, DataTypes) => {
         // Other model options go here
       }
     );
+    Post.associate = function associate(models) {
+      Post.belongsTo(models.User, {
+        as: 'author',
+        foreignKey: {
+          name: 'authorId',
+          allowNull: false,
+        },
+      });
+  };
     return Post;
   };

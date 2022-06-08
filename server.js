@@ -17,18 +17,18 @@ var corsOptions = {
  
   require("./routes/user.route")(app);
   require("./routes/comment.route")(app);
-  require("./routes/post.route")(app);
+ // require("./routes/post.route")(app);
 // set port, listen for requests
 const port = process.env.PORT || 8080;
 app.listen();
-  app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}.`);
+  app.listen(port, () => {
+    console.log(`Server is running on port ${port}.`);
   });
 
 
-app.use();
+// app.use();
 const groupomania_internal_network = require("./models");
-groupomania_internal_network.sequelize.sync();
+// groupomania_internal_network.sequelize.sync();
 
 groupomania_internal_network.sequelize.sync({ force: true }).then(() => {
     console.log("Drop and re-sync groupomania_internal_network.");

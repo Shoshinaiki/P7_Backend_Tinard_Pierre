@@ -1,6 +1,6 @@
 {
   "development": {
-    "username": "Shoshinaiki",
+    "username": "root",
     "database": "groupomania_internal_network",
     "host": "127.0.0.1",
     "dialect": "mysql"
