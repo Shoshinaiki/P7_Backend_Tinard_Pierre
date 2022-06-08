@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
       {
         // Model attributes are defined here
         postId: { 
-          primarykey: true,
+          primaryKey: true,
           type: DataTypes.INTEGER,
           autoIncrement: true,
         },

@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
       "Comment",
       {
         // Model attributes are defined here
-        idPrimarykey: {
+        idPrimaryKey: {
           type: DataTypes.INTEGER,
         },
         text: {
