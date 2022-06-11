@@ -37,14 +37,13 @@ module.exports = (sequelize, DataTypes) => {
         // Other model options go here
       }
     );
-    Post.associate = function associate(models) {
+    /* Post.associate = function associate(models) {
       Post.belongsTo(models.User, {
         as: 'author',
         foreignKey: {
           name: 'authorId',
           allowNull: false,
         },
-      });
-  };
+      }); */
     return Post;
   };
