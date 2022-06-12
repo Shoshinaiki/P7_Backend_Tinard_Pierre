@@ -1,13 +1,11 @@
 const express = require("express");
-const bodyParser = require("body-parser");
-const groupomania_internal_network = require("groupomania_internal_network");
+const db = require("./models/index");
 const userRoutes = require("./routes/user.route.js");
 const postRoutes = require("./routes/post.route");
+const commentRoutes = require("./routes/comment.route");
 const path = require("path");
 const helmet = require("helmet");
 const rate = require("express-rate-limit");
-const User = require("users");
-const groupomania_internal_network = require("./models");
 const dotenv = require("dotenv").config({ encoding: "latin1" });
 
 const app = express();
@@ -38,13 +36,16 @@ app.use((req, res, next) => {
   next();
 });
 
-groupomania_internal_network.sequelize.sync({ force: true });
-console.log("The table for the User model was just (re)created!");
-
-app.use(bodyParser.json());
+db.sequelize
+  .sync({ alter: true })
+  .then(() => console.log("DB connection OK"))
+  .catch((err) => {
+    console.log("DB connection failed !");
+  });
 
 app.use("/images", express.static(path.join(__dirname, "images")));
 
 app.use("/api/auth", userRoutes);
 app.use("/api/posts", postRoutes);
+app.use("/api/comments", commentRoutes);
 module.exports = app;

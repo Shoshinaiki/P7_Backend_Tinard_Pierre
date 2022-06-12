@@ -1,17 +1,11 @@
-module.exports = (app) => {
-  const express = require("express");
-  const router = express.Router();
-  const createMessage = require("../controllers/post.ctrl");
-  const findAllMessages = require("../controllers/post.ctrl");
-  const findOneMessage = require("../controllers/post.ctrl");
-  const modifyMessage = require("../controllers/post.ctrl");
-  const deleteMessage = require("../controllers/post.ctrl");
+const express = require("express");
+const router = express.Router();
+const post = require("../controllers/post.ctrl");
 
-  router.post("/", createMessage);
-  router.get("/", findAllMessages);
-  router.get("/", findOneMessage);
-  router.put("/:id", modifyMessage);
-  router.delete("/:id", deleteMessage);
+router.post("/", post.createMessage);
+router.get("/", post.findAllMessages);
+router.get("/:id", post.findOneMessage);
+router.put("/:id", post.modifyMessage);
+router.delete("/:id", post.deleteMessage);
 
-  module.exports = router;
-};
+module.exports = router;
