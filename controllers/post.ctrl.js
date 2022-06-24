@@ -1,3 +1,5 @@
+const req = require("express/lib/request");
+const res = require("express/lib/response");
 const db = require("../models"); // les modèles sequelize
 const Post = db.post;
 const Comment = db.comment;
@@ -42,8 +44,29 @@ exports.findOneMessage = (req, res, next) => {
     .catch((error) => res.status(400).json({ error }));
 };
 
+// UPDATE 
+
 exports.modifyMessage = (req, res, next) => {};
+  Post.update(req.body, {
+    id: req.params.id,
+    text: req.params.text,
+    imageUrl: req.params.imageUrl,
+    author: req.params.author
+  }
+  .then(() => res.status(200).json({ message: "message modifié !" }))
+  .catch((error) => res.status(400).json({ error })) 
+  );
 
 // DELETE
+
+Post.destroy(req.body, {
+  id: req.params.id,
+  text: req.params.text,
+  imageUrl: req.params.imageUrl,
+  author: req.params.author
+}
+.then(() => res.status(200).json({message: "message supprimé !"}))
+.catch((error) => res.status(400).json({ error })) 
+);
 
 exports.deleteMessage = (req, res, next) => {};
