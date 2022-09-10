@@ -2,14 +2,16 @@ const db = require("../models"); // les modèles sequelize
 const User = db.user;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const dotenv = require("dotenv").config({ encoding: "latin1" });
 
 // SIGNUP / Inscription
 
 exports.signup = (req, res, next) => {
-  if (!req.body.firstName || !req.body.email || !req.body.password) {
+  console.log(req.body)
+  if (!req.body.firstName || !req.body.email || !req.body.password || !req.body.lastName) {
     return res.status(400).json({ message: "one or more paramaters empty" });
   }
-  const nameRegex = /(.*[a-z]){3,30}/;
+  const nameRegex = /(.*[a-z/A-Z]){3,30}/;
   const mailRegex = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
   // const pwdRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
@@ -32,6 +34,7 @@ exports.signup = (req, res, next) => {
           .save() // On sauvegarde tout dans la base de données
           .then((user) => {
             if (user) {
+              console.log("test")
               return res.status(201).json({ message: "new user created" });
             }
           })

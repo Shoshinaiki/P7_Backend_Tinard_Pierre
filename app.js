@@ -6,7 +6,6 @@ const commentRoutes = require("./routes/comment.route");
 const path = require("path");
 const helmet = require("helmet");
 const rate = require("express-rate-limit");
-const dotenv = require("dotenv").config({ encoding: "latin1" });
 
 // test
 

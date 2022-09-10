@@ -5,7 +5,6 @@ const post = require("../controllers/post.ctrl");
 router.post("/", post.createMessage);
 router.get("/", post.findAllMessages);
 router.get("/:id", post.findOneMessage);
-router.put("/:id", post.modifyMessage);
 router.delete("/:id", post.deleteMessage);
 
 module.exports = router;

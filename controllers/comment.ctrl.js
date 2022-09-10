@@ -1,6 +1,5 @@
 const db = require("../models"); // les modèles sequelize
 const Comment = db.comment;
-const User = db.user;
 
 // Routes CRUD: Create, Read, Update, Delete.
 
