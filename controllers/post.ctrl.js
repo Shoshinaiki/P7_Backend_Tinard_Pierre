@@ -1,6 +1,5 @@
 const db = require("../models"); // les modèles sequelize
 const Post = db.post;
-const Comment = db.comment;
 
 // Routes CRUD : Create, Read, Update, Delete
 
@@ -10,6 +9,7 @@ exports.createMessage = (req, res, next) => {
   const post = new Post({
     author: req.body.author,
     text: req.body.text,
+    titre: req.body.titre,
     // imageUrl: `${req.protocol}://${req.get("host")}/images/${
     //   req.file.filename
     // }`,
@@ -23,11 +23,7 @@ exports.createMessage = (req, res, next) => {
 // READ
 
 exports.findAllMessages = (req, res, next) => {
-  Post.findAll({
-    include: { model: Comment },
-
-    order: [["id", "DESC"]],
-  })
+  Post.findAll()
     .then((messages) => {
       res.status(200).json(messages);
     })
@@ -45,13 +41,7 @@ exports.findOneMessage = (req, res, next) => {
 // DELETE
 
 exports.deleteMessage = (req, res, next) => {
-  Post.destroy(req.body, {
-    id: req.params.id,
-    text: req.params.text,
-    imageUrl: req.params.imageUrl,
-    author: req.params.author
-  }
+  Post.destroy({ where: { id: req.params.id } })
   .then(() => res.status(200).json({message: "message supprimé !"}))
   .catch((error) => res.status(400).json({ error })) 
-  );
 };

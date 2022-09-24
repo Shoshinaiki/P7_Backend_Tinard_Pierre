@@ -6,15 +6,20 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.INTEGER,
       autoIncrement: true,
     },
+    titre: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
     text: {
       type: Sequelize.STRING,
-      // allowNull defaults to true
+      allowNull: false,
     },
     imageUrl: {
       type: Sequelize.STRING,
     },
     author: {
       type: Sequelize.STRING,
+      allowNull: false,
     },
   });
   return Post;

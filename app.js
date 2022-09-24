@@ -2,7 +2,6 @@ const express = require("express");
 const db = require("./models/index");
 const userRoutes = require("./routes/user.route.js");
 const postRoutes = require("./routes/post.route");
-const commentRoutes = require("./routes/comment.route");
 const path = require("path");
 const helmet = require("helmet");
 const rate = require("express-rate-limit");
@@ -48,5 +47,4 @@ app.use("/images", express.static(path.join(__dirname, "images")));
 
 app.use("/api/auth", userRoutes);
 app.use("/api/posts", postRoutes);
-app.use("/api/comments", commentRoutes);
 module.exports = app;
