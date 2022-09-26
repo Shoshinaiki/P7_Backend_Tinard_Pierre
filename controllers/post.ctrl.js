@@ -10,9 +10,7 @@ exports.createMessage = (req, res, next) => {
     author: req.body.author,
     text: req.body.text,
     titre: req.body.titre,
-    // imageUrl: `${req.protocol}://${req.get("host")}/images/${
-    //   req.file.filename
-    // }`,
+    imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
   });
   post
     .save()
