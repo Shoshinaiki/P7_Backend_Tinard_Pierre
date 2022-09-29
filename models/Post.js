@@ -21,6 +21,14 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
       allowNull: false,
     },
+    like: {
+      type: Sequelize.INTEGER,
+      defaultValue: 0,
+    },
+    // usersLiked: {
+    //   type: Sequelize.ARRAY(Sequelize.INTEGER),
+    //   defaultValue: [],
+    // }
   });
   return Post;
 };

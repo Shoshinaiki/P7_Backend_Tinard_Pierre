@@ -7,5 +7,7 @@ router.post("/", multer, post.createMessage);
 router.get("/", post.findAllMessages);
 router.get("/:id", post.findOneMessage);
 router.delete("/:id", post.deleteMessage);
+router.post("/:id/:userId", post.like);
+router.put("/:id",multer, post.modifyMessage);
 
 module.exports = router;
