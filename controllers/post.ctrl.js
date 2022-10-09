@@ -77,32 +77,32 @@ exports.modifyMessage = (req, res) => {
 // LIKE 
 
 exports.like = (req, res, next) => {
-  const like = parseInt(req.body.like);
-  if (like === 1) {
     Post.findOne({ id: req.params.id })
       .then((post) => {
-        post.likes++;
-        post.usersLiked.push(req.params.userId);
-        Post.updateOne(
-          { id: req.params.id },
-          { likes: post.likes, usersLiked: post.usersLiked, id: req.params.id }
-        )
-          .then(() => res.status(200).json({ message: "Vous avez like ce produit !" }))
-          .catch((error) => res.status(400).json({ error }));
-      })
-    }
-    else if (like === 0) {
-      Post.findOne({ id: req.params.id })
-        .then((post) => {
-          post.likes--;
-          let index = post.usersLiked.findindex( elem => elem == req.params.userId )
-          post.usersLiked.splice(index, 1);
-          Post.updateOne(
-            { id: req.params.id },
-            { likes: post.likes, usersLiked: post.usersLiked, id: req.params.id }
+        let string = post.userLiked
+        let array = string.split(",")
+        let index = array.findIndex( elem => elem == req.params.userId )
+        if(index == -1) {
+          post.like++;
+          array.push(req.params.userId);
+          post.userLiked = array.toString()
+          Post.update(
+            { like: post.like, userLiked: post.userLiked },
+            {where: {id: req.params.id}} 
           )
             .then(() => res.status(200).json({ message: "Vous avez like ce produit !" }))
             .catch((error) => res.status(400).json({ error }));
-        })
-      }
+        }
+        else {
+          post.like--;
+          array.splice(index, 1);
+          post.userLiked = array.toString()
+          Post.update(
+            { like: post.like, userLiked: post.userLiked },
+            {where: {id: req.params.id}} 
+          )
+            .then(() => res.status(200).json({ message: "Vous avez like ce produit !" }))
+            .catch((error) => res.status(400).json({ error }));
+        }
+      })
   }
