@@ -17,17 +17,9 @@ module.exports = (sequelize, Sequelize) => {
     imageUrl: {
       type: Sequelize.STRING,
     },
-    author: {
+    user: {
       type: Sequelize.STRING,
       allowNull: false,
-    },
-    like: {
-      type: Sequelize.INTEGER,
-      defaultValue: 0,
-    },
-    userLiked: {
-      type: Sequelize.STRING,
-      defaultValue: ""
     }
   });
   return Post;

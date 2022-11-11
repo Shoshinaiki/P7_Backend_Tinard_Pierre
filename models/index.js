@@ -20,5 +20,11 @@ db.Sequelize = Sequelize;
 
 db.user = require("./User.js")(sequelize, Sequelize);
 db.post = require("./Post.js")(sequelize, Sequelize);
+db.postHasLike = require("./PostHasLike.js")(sequelize, Sequelize);
+
+db.user.hasMany(db.post, {onDelete: "CASCADE"})
+db.post.belongsTo(db.user)
+db.post.hasMany(db.postHasLike, {onDelete: "CASCADE"})
+db.postHasLike.belongsTo(db.post)
 
 module.exports = db;

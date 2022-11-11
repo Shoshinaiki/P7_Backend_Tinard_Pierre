@@ -1,5 +1,7 @@
+const { postHasLike } = require("../models");
 const db = require("../models"); // les modèles sequelize
 const Post = db.post;
+const PostHasLike = db.postHasLike;
 
 // Routes CRUD : Create, Read, Delete, Modify and LIKE
 
@@ -7,21 +9,29 @@ const Post = db.post;
 
 exports.createMessage = (req, res, next) => {
   const post = new Post({
-    author: req.body.author,
+    user: req.body.user,
     text: req.body.text,
     titre: req.body.titre,
+    UserId: req.body.userId,
     imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
   });
   post
     .save()
-    .then(() => res.status(201).json({ message: "Publication réussie" }))
+    .then((post) => {
+      body = {
+        PostId: post.id,
+      }
+      postHasLike.create(body)
+      .then(() => res.status(201).json({ message: "Publication réussie" })) 
+      .catch((error) => res.status(400).json({ error }));
+    })
     .catch((error) => res.status(400).json({ error }));
 };
 
 // READ
 
 exports.findAllMessages = (req, res, next) => {
-  Post.findAll()
+  Post.findAll({include: PostHasLike})
     .then((messages) => {
       res.status(200).json(messages);
     })
@@ -77,32 +87,32 @@ exports.modifyMessage = (req, res) => {
 // LIKE 
 
 exports.like = (req, res, next) => {
-    Post.findOne({ id: req.params.id })
-      .then((post) => {
-        let string = post.userLiked
-        let array = string.split(",")
-        let index = array.findIndex( elem => elem == req.params.userId )
-        if(index == -1) {
-          post.like++;
-          array.push(req.params.userId);
-          post.userLiked = array.toString()
-          Post.update(
-            { like: post.like, userLiked: post.userLiked },
-            {where: {id: req.params.id}} 
-          )
-            .then(() => res.status(200).json({ message: "Vous avez like ce produit !" }))
-            .catch((error) => res.status(400).json({ error }));
-        }
-        else {
-          post.like--;
-          array.splice(index, 1);
-          post.userLiked = array.toString()
-          Post.update(
-            { like: post.like, userLiked: post.userLiked },
-            {where: {id: req.params.id}} 
-          )
-            .then(() => res.status(200).json({ message: "Vous avez like ce produit !" }))
-            .catch((error) => res.status(400).json({ error }));
-        }
-      })
-  }
+  Post.findByPk(req.params.id )
+    .then((post) => {
+      let string = post.userLiked
+      let array = string.split(",")
+      let index = array.findIndex( elem => elem == req.params.userId )
+      if(index == -1) {
+        post.like++;
+        array.push(req.params.userId);
+        post.userLiked = array.toString()
+        Post.update(
+          { like: post.like, userLiked: post.userLiked },
+          {where: {id: req.params.id}} 
+        )
+          .then(() => res.status(200).json({ message: "Vous avez like ce produit !" }))
+          .catch((error) => res.status(400).json({ error }));
+      }
+      else {
+        post.like--;
+        array.splice(index, 1);
+        post.userLiked = array.toString()
+        Post.update(
+          { like: post.like, userLiked: post.userLiked },
+          {where: {id: req.params.id}} 
+        )
+          .then(() => res.status(200).json({ message: "Vous avez like ce produit !" }))
+          .catch((error) => res.status(400).json({ error }));
+      }
+    })
+}
