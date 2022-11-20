@@ -89,30 +89,32 @@ exports.modifyMessage = (req, res) => {
 exports.like = (req, res, next) => {
   Post.findByPk(req.params.id )
     .then((post) => {
-      let string = post.userLiked
-      let array = string.split(",")
-      let index = array.findIndex( elem => elem == req.params.userId )
-      if(index == -1) {
-        post.like++;
-        array.push(req.params.userId);
-        post.userLiked = array.toString()
-        Post.update(
-          { like: post.like, userLiked: post.userLiked },
-          {where: {id: req.params.id}} 
-        )
-          .then(() => res.status(200).json({ message: "Vous avez like ce produit !" }))
-          .catch((error) => res.status(400).json({ error }));
-      }
-      else {
-        post.like--;
-        array.splice(index, 1);
-        post.userLiked = array.toString()
-        Post.update(
-          { like: post.like, userLiked: post.userLiked },
-          {where: {id: req.params.id}} 
-        )
-          .then(() => res.status(200).json({ message: "Vous avez like ce produit !" }))
-          .catch((error) => res.status(400).json({ error }));
-      }
-    })
+      PostHasLike.findOne({where: {PostId: post.id}})
+      .then((postHasLike) => {
+        let string = postHasLike.userLiked
+        let array = string.split(",")
+        let index = array.findIndex( elem => elem == req.params.userId )
+        if(index == -1) {
+          postHasLike.like++;
+          array.push(req.params.userId);
+          postHasLike.userLiked = array.toString()
+          PostHasLike.update(
+            { like: postHasLike.like, userLiked: postHasLike.userLiked },
+            {where: {PostId: post.id}} 
+          )
+            .then(() => res.status(200).json({ message: "Vous avez like ce produit !" }))
+            .catch((error) => res.status(400).json({ error }));
+        } else {
+          postHasLike.like--;
+          array.splice(index, 1);
+          postHasLike.userLiked = array.toString()
+          PostHasLike.update(
+            { like: postHasLike.like, userLiked: postHasLike.userLiked },
+            {where: {PostId: post.id}} 
+          )
+            .then(() => res.status(200).json({ message: "Vous avez like ce produit !" }))
+            .catch((error) => res.status(400).json({ error }));
+        }})
+      })
+      .catch((error) => res.status(400).json({ error }));
 }
