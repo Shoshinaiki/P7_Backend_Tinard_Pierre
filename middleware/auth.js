@@ -1,23 +1,23 @@
 const jwt = require('jsonwebtoken');
+const { user } = require('../models');
 const dotenv = require("dotenv").config({ encoding: "latin1" });
 
 module.exports = (req, res, next) => {
-  try {
-    const token = req.headers.authorization.split(' ')[1];
+    const token = req.headers.authorization;
     console.log(token)
-    console.log(test)
-    const decodedToken = jwt.verify(token, process.env.TOKEN_KEY);
-    const userId = decodedToken.userId;
-    if (req.body.userId && req.body.userId !== userId) {
-      throw 'Invalid user ID';
-    } else {
-      req.token = userId;
-      next();
+    if (!token) {
+      return res.status(403).send({
+        message: "You must be logged in",
+      });
     }
-  } catch {
-    res.status(401).json({
-      error: new Error('Invalid request!')
+    jwt.verify(token, process.env.TOKEN_KEY, (err) => {
+      if (err) {
+        return res.status(401).json({ message: "Bad token" });
+      }
+      // Stockage userId - role pour authentification route
+      req.userId = jwt.verify(token, process.env.TOKEN_KEY).userId;
+      req.role = jwt.verify(token, process.env.TOKEN_KEY).role;
+      next();
     });
-  }
 };
 

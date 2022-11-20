@@ -4,11 +4,11 @@ const post = require("../controllers/post.ctrl");
 const multer = require("../middleware/multerConfig.js")
 const auth = require("../middleware/auth.js")
 
-router.post("/", multer, post.createMessage);
+router.post("/", auth, multer, post.createMessage);
 router.get("/", auth, post.findAllMessages);
-router.get("/:id", post.findOneMessage);
-router.delete("/:id", post.deleteMessage);
+router.get("/:id", auth, post.findOneMessage);
+router.delete("/:id", auth, post.deleteMessage);
 router.put("/:id/:userId", post.like);
-router.put("/:id",multer, post.modifyMessage);
+router.put("/:id",auth, multer, post.modifyMessage);
 
 module.exports = router;
