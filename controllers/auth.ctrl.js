@@ -37,7 +37,6 @@ exports.signup = (req, res, next) => {
     bcrypt
       .hash(req.body.password, parseInt(8))
       .then((hash) => {
-        console.log(hash)
         User.create({
           email: req.body.email,
           password: hash,
@@ -48,7 +47,7 @@ exports.signup = (req, res, next) => {
           res.send({ message: "User was registered successfully!" });
         })
       })
-      //.catch((error) => res.status(500).json({ error }));
+      .catch((error) => res.status(500).json({ error }));
   }
 };
 

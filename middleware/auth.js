@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { user } = require('../models');
+// const { user } = require('../models');
 const dotenv = require("dotenv").config({ encoding: "latin1" });
 
 module.exports = (req, res, next) => {

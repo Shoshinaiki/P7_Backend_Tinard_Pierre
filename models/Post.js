@@ -17,10 +17,6 @@ module.exports = (sequelize, Sequelize) => {
     imageUrl: {
       type: Sequelize.STRING,
     },
-    user: {
-      type: Sequelize.STRING,
-      allowNull: false,
-    }
   });
   return Post;
 };

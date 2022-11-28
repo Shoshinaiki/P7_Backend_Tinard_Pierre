@@ -2,6 +2,7 @@ const { postHasLike } = require("../models");
 const db = require("../models"); // les modèles sequelize
 const Post = db.post;
 const PostHasLike = db.postHasLike;
+const User = db.user;
 
 // Routes CRUD : Create, Read, Delete, Modify and LIKE
 
@@ -9,7 +10,6 @@ const PostHasLike = db.postHasLike;
 
 exports.createMessage = (req, res, next) => {
   const post = new Post({
-    user: req.body.user,
     text: req.body.text,
     titre: req.body.titre,
     UserId: req.body.userId,
@@ -31,7 +31,7 @@ exports.createMessage = (req, res, next) => {
 // READ
 
 exports.findAllMessages = (req, res, next) => {
-  Post.findAll({include: PostHasLike})
+  Post.findAll({include: [PostHasLike, User]})
     .then((messages) => {
       res.status(200).json(messages);
     })
