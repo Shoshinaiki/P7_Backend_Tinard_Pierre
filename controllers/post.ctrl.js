@@ -6,7 +6,7 @@ const User = db.user;
 
 // Routes CRUD : Create, Read, Delete, Modify and LIKE
 
-// CREATE
+// CREATE 
 
 exports.createMessage = (req, res, next) => {
   const post = new Post({

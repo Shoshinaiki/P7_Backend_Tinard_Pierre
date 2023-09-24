@@ -5,9 +5,14 @@ const User = db.user;
 // READ
 
 exports.findOneUser = (req, res, next) => {
-  User.findByPk(req.params.id)
+  User.findByPk(req.params.id) 
     .then((user) => {
-      res.status(200).json(user);
+      if(req.userId === user.id) {
+        res.status(200).json(user);
+      }
+      else {
+        res.status(401).json({ message: "Unauthorized" });
+      }
     })
     .catch((error) => res.status(404).json({ error }));
 };
