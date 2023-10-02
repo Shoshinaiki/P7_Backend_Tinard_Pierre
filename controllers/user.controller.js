@@ -8,13 +8,13 @@ const dotenv = require("dotenv").config({ encoding: "latin1" });
 
 const passw = new passwordValidator();
 passw
-    .is().min(8)                                                     // Minimum length 8
-    .is().max(100)                                                   // Maximum length 100
-    .has().uppercase()                                               // Must have uppercase letters
-    .has().lowercase()                                               // Must have lowercase letters
-    .has().digits()                                                  // Must have digits
-    .has().not().spaces()                                            // Should not have spaces
-    .is().not().oneOf(['guest', '159357', 'azerty']); // Blacklist these values
+    .is().min(8)                                                     
+    .is().max(100)                                                   
+    .has().uppercase()                                               
+    .has().lowercase()                                               
+    .has().digits()                                                  
+    .has().not().spaces()                                            
+    .is().not().oneOf(['guest', '159357', 'azerty']); // Valeurs de la blacklist
 
 // SIGNUP / Inscription
 

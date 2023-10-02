@@ -15,15 +15,15 @@ app.use(express.json());
 app.use(cors());
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
-app.use(
- rate({
+/* app.use(
+  rate({
   windowMs: 24 * 60 * 60 * 1000,
   max: 100,
   message:
   "Vous avez effectué plus de 100 requétes dans une limite de 24 heures!",
   headers: true,
   })
- );
+ ); */
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
