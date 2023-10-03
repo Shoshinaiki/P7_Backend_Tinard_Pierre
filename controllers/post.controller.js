@@ -31,7 +31,7 @@ exports.createMessage = (req, res, next) => {
 // READ
 
 exports.findAllMessages = (req, res, next) => {
-  Post.findAll({include: [PostHasLike, User]})
+  Post.findAll({include : [PostHasLike, User], order: [['createdAt', 'desc']]})
     .then((messages) => {
       res.status(200).json(messages);
     })
