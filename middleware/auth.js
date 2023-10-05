@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken');
-// const { user } = require('../models');
 const dotenv = require("dotenv").config({ encoding: "latin1" });
 
 
