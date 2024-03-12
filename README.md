@@ -34,10 +34,11 @@ BDD (Base De Données) `MySQL`, `Sequelize` .
 
 ## Installer MySQL:
 
-1. sur `https://dev.mysql.com/downloads/installer/` récupérer et installer le 2ème e programme d’installation de MySQL (Windows (x86, 32-bit), MSI Installer 8.0.30  (448.3M)
+1. sur `https://dev.mysql.com/downloads/installer/` récupérer et installer le 2ème programme d’installation de MySQL (Windows (x86, 32-bit), MSI Installer 8.0.30  (448.3M)
    
 2. Suivre les étapes d'installation:
-Server onky => Next => Execute(install) => Next => Use Strong Password (celui configuré dans la BDD groupomania) puis Next => Apply Configuration => execute =>
+Server only => Next => Execute(install) => Next => Use Strong Password
+(celui configuré dans la BDD groupomania) puis Next => Apply Configuration => execute =>
 Finish => Next et Finish: MySQL est installé.
 
 Ce qui installe également l'application `mysql 8.0 command line client`: (terminal de commandes MySQL).
