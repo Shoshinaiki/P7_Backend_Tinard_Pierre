@@ -27,6 +27,7 @@ Gérer les échanges d'un réseau social avec une BDD (base de données) relatio
 BACKEND: 
 
 Copier le fichier `.env.example`, le renommer en  `.env` et attribuer une valeur à `TOKEN_KEY` et `DB_PASSWORD`.
+
 La valeur `DB_PASSWORD` doit être la même que celle utilisée pour se connexter à `mysql 8.0 command line client`/ `Workbench`.
 
 BDD (Base De Données) `MySQL`, `Sequelize` .
