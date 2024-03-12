@@ -32,20 +32,26 @@ La valeur `DB_PASSWORD` doit être la même que celle utilisée pour se connexte
 
 BDD (Base De Données) `MySQL`, `Sequelize` .
 
-## P7 Accéder à la base de données: 
+## Installer MySQL:
+
+1. sur `https://dev.mysql.com/downloads/installer/` récupérer et installer le 2ème e programme d’installation de MySQL (Windows (x86, 32-bit), MSI Installer 8.0.30  (448.3M)
+   
+2. Suivre les étapes d'installation:
+Server onky => Next => Execute(install) => Next => Use Strong Password (celui configuré dans la BDD groupomania) puis Next => Apply Configuration => execute =>
+Finish => Next et Finish: MySQL est installé.
+
+Ce qui installe également l'application `mysql 8.0 command line client`: (terminal de commandes MySQL).
+
+## Accéder à la base de données: 
 
 1. Accéder à la (BDD) base de données groupomania, et la lancer avec `Workbench`:
 
 Installer sur PC/ ou Mac `MySQL Workbench` =>   
 `https://www.mysql.com/fr/products/workbench/`
 
-Ce qui installera également l'application `mysql 8.0 command line client` : 
-
-(terminal de commandes MySQL).
-
 Lancer MySQL Workbench:
 
-- Cliquer sur le bouton: `Local instance MySQL80` et créer le Password / ou utiliser `DB_PASSWORD`.
+- Cliquer sur le bouton: `Local instance MySQL80` et utiliser `DB_PASSWORD`.
 
 On retrouve la `BDD groupomania` .
 
@@ -59,7 +65,7 @@ On y retrouve les tables : - `posthaslikes`
 
 Lancer l'application `mysql 8.0 command line client` depuis les applications locales sur PC/ ou Mac.
 
-- Créer le Password / ou utiliser `DB_PASSWORD`.
+- Utiliser `DB_PASSWORD`.
 
 Rentrer les commandes suivantes:
 
@@ -69,11 +75,11 @@ Rentrer les commandes suivantes:
 
 3) `update users set superUser:` Définir le rôle admin. 
 
-Après avoir sur l'application créé plusieurs utilisateurs, avant la connexion sur les espaces utilisateurs:
+(Après avoir sur l'application frontend créé plusieurs utilisateurs, et avant la connexion sur les espaces utilisateurs):
 
 - `select * from users;`  Pour sélectionner les différents utilisateurs.
 
-- `update users set superUser where id = 1 where id = id utilisateur concerné `   Pour définir un rôle admin.
+- `update users set superUser where id = 1 where id = id utilisateur concerné `  pour définir un rôle admin.
 
 - Vérifier l'attribution du rôle admin: `select * from users;`
 
